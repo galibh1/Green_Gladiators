@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+* { -webkit-tap-highlight-color: transparent; }
+
+:root{
+  color-scheme: light;
+}
+
+body{
+  font-family: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* ============================= */
+/* Trusted-by strip (Figma-like) */
+/* ============================= */
+
+.gg-trust-logo{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.gg-trust-logo svg{
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.gg-trust-word{
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #000;
+}
+
+/* The wrapper in TrustedBy should have overflow-hidden.
+   This row is intentionally "too wide" so edges get clipped like Figma. */
+.gg-marquee{
+  display: flex;
+  width: max-content;
+  gap: 110px;
+  animation: gg-marquee 26s linear infinite;
+}
+
+.gg-marquee-row{
+  display: flex;
+  align-items: center;
+  gap: 110px;
+  padding: 0 180px; /* THIS is what creates that off-screen cut like figma */
+}
+
+/* If you want it static (no movement), comment animation line above */
+
+@keyframes gg-marquee{
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
