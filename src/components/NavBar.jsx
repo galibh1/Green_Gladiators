@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+// src/components/NavBar.jsx
+import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const links = [
@@ -15,40 +16,38 @@ export default function NavBar() {
   const location = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
+    const onScroll = () => setScrolled(window.scrollY > 6)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // basic active detection for hash links
-  const activeLabel = (() => {
+  const activeLabel = useMemo(() => {
     if (location.pathname !== '/') return ''
-    const hash = (window.location.hash || '#home').replace('#', '')
+    const hash = (location.hash || '#home').replace('#', '')
     const found = links.find((l) => l.to === `/#${hash}`)
     return found?.label || 'Home'
-  })()
+  }, [location.pathname, location.hash])
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className={`mx-auto w-[min(1500px,96vw)] transition-all duration-300 ${scrolled ? 'mt-3' : 'mt-4'}`}>
-        <div
-          className={[
-            'flex items-center justify-between',
-            'rounded-2xl px-8 py-5',
-            'border border-white/20',
-            'bg-white/22 backdrop-blur-xl',
-            'shadow-[0_14px_40px_rgba(0,0,0,0.35)]',
-            scrolled ? 'bg-white/18' : 'bg-white/22',
-          ].join(' ')}
-        >
+      {/* Full-width blurred bar like screenshot */}
+      <div
+        className={[
+          'w-full',
+          'backdrop-blur-2xl',
+          'border-b border-white/10',
+          scrolled ? 'bg-black/35 shadow-[0_14px_40px_rgba(0,0,0,0.45)]' : 'bg-black/25',
+        ].join(' ')}
+      >
+        <div className="mx-auto flex h-[88px] max-w-7xl items-center justify-between px-6">
           {/* Logo */}
-          <div className="flex items-baseline gap-0.5 select-none">
+          <a href="/#home" className="flex items-baseline gap-1 select-none">
             <span className="text-3xl font-semibold tracking-tight text-gg">Green</span>
-            <span className="text-3xl font-light tracking-tight text-white/85"> Gladiators</span>
-          </div>
+            <span className="text-3xl font-light tracking-tight text-white/90"> Gladiators</span>
+          </a>
 
-          {/* Links (centered like Figma) */}
+          {/* Links */}
           <nav className="hidden md:flex items-center gap-10">
             {links.map((l) => {
               const isActive = l.label === activeLabel
@@ -57,7 +56,7 @@ export default function NavBar() {
                   key={l.label}
                   href={l.to}
                   className={[
-                    'text-[18px] font-medium tracking-wide',
+                    'text-[20px] font-medium tracking-wide',
                     'transition-colors duration-200',
                     isActive ? 'text-gg' : 'text-white/80 hover:text-white',
                   ].join(' ')}
@@ -69,7 +68,15 @@ export default function NavBar() {
           </nav>
 
           {/* Neon button */}
-          <button className="gg-neon-btn">
+          <button
+            className={[
+              'rounded-xl px-8 py-3 text-lg font-semibold text-black',
+              'bg-gg',
+              'shadow-[0_0_0_3px_rgba(0,0,0,0.15),0_0_22px_rgba(34,197,94,0.65)]',
+              'hover:brightness-110 active:brightness-105',
+              'transition',
+            ].join(' ')}
+          >
             Login/Signup
           </button>
         </div>
