@@ -1,7 +1,11 @@
+// src/pages/Home.jsx
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import NavBar from '../components/NavBar.jsx'
 import Footer from '../components/Footer.jsx'
 import TrustedBy from '../components/TrustedBy.jsx'
+import CommunityHubSection from '../components/CommunityHubSection.jsx'
+import StoriesSection from '../components/StoriesSection.jsx'
+import ContactSection from '../components/ContactSection.jsx'
 
 const rides = [
   {
@@ -57,10 +61,6 @@ function ArrowRight({ className = '' }) {
   )
 }
 
-function Icon({ children }) {
-  return <div className="grid h-12 w-12 place-items-center rounded-2xl bg-zinc-50 shadow-soft">{children}</div>
-}
-
 function Card({ className = '', children }) {
   return <div className={`rounded-3xl bg-white shadow-soft ring-1 ring-zinc-200/70 ${className}`}>{children}</div>
 }
@@ -82,16 +82,6 @@ function GlowButton({ variant = 'primary', className = '', children, ...props })
     <button {...props} className={`${base} bg-gg text-black shadow-glow hover:brightness-110 ${className}`}>
       {children}
     </button>
-  )
-}
-
-function SectionTitle({ kicker, title, subtitle, center = false }) {
-  return (
-    <div className={`${center ? 'text-center' : ''}`}>
-      {kicker ? <div className="text-sm font-semibold tracking-wide text-gg">{kicker}</div> : null}
-      <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-black md:text-5xl">{title}</h2>
-      {subtitle ? <p className="mt-4 text-lg text-zinc-500">{subtitle}</p> : null}
-    </div>
   )
 }
 
@@ -172,16 +162,19 @@ export default function Home() {
         "I've found mechanics I trust and routes I never would have discovered alone. Green Gladiators made cycling feel less solitary.",
       name: 'Marcus Chen',
       meta: 'Weekend rider, Sydney',
+      avatar: '/images/avatar.jpeg',
     },
     {
       quote: 'The weekly rides are perfectly curated. It feels like a real community, not just another feed.',
       name: 'Amina Rahman',
       meta: 'Road cyclist, Dhaka',
+      avatar: '/images/avatar.jpeg',
     },
     {
       quote: 'Vendors and shops I actually trust—plus meetups that keep me motivated every week.',
       name: 'Diego Alvarez',
       meta: 'Gravel rider, Valencia',
+      avatar: '/images/avatar.jpeg',
     },
   ]
 
@@ -257,7 +250,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TRUSTED BY (Figma-like strip) */}
+      {/* TRUSTED BY */}
       <TrustedBy />
 
       {/* NEXT GROUP RIDE */}
@@ -307,7 +300,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* UPCOMING (Figma-like) */}
+      {/* UPCOMING */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
@@ -327,19 +320,14 @@ export default function Home() {
                 key={r.title}
                 className="overflow-hidden rounded-[28px] bg-white shadow-soft ring-1 ring-zinc-200/70"
               >
-                {/* Image top */}
                 <div className="relative h-60">
                   <img src={r.image} alt="" className="h-full w-full object-cover" />
-
-                  {/* Bottom fade like figma */}
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
 
-                  {/* Day badge */}
                   <div className="absolute right-5 top-5 grid h-16 w-24 place-items-center rounded-xl bg-white text-3xl font-extrabold text-gg shadow-soft">
                     {r.day}
                   </div>
 
-                  {/* Stats row (on top of image) */}
                   <div className="absolute bottom-4 left-5 right-5 grid grid-cols-3 gap-6 text-white">
                     {r.stats.map((s) => (
                       <div key={s.k}>
@@ -350,21 +338,15 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="px-8 pb-10 pt-8">
-                  {/* Location row */}
                   <div className="flex items-center gap-3 text-zinc-500">
                     <span className="text-gg">🚴</span>
                     <span className="text-base">{r.location}</span>
                   </div>
 
-                  {/* Title */}
                   <h3 className="mt-4 text-3xl font-extrabold tracking-tight text-black">{r.title}</h3>
-
-                  {/* Desc */}
                   <p className="mt-3 text-lg text-zinc-500">{r.desc}</p>
 
-                  {/* Join link */}
                   <button className="mt-8 inline-flex items-center gap-3 text-lg font-medium text-black">
                     Join the ride <ArrowRight className="translate-y-[1px]" />
                   </button>
@@ -400,11 +382,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* COMMUNITY HUB */}
+      <CommunityHubSection />
+
       {/* TESTIMONIALS */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-24">
           <div className="text-center">
-            <h2 className="text-6xl font-extrabold tracking-tight text-black">Real stories</h2>
+            <div className="text-base font-semibold text-black/80">Tagline</div>
+            <h2 className="mt-5 text-6xl font-extrabold tracking-tight text-black">Real stories</h2>
             <p className="mt-4 text-lg text-zinc-500">What members are saying</p>
           </div>
 
@@ -412,17 +398,17 @@ export default function Home() {
             <button
               aria-label="Previous"
               onClick={() => setActiveTestimonial((v) => (v - 1 + testimonials.length) % testimonials.length)}
-              className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white p-4 shadow-soft ring-1 ring-zinc-200 hover:bg-zinc-50"
+              className="absolute left-0 top-1/2 z-10 -translate-y-1/2 -translate-x-6 rounded-full bg-white p-4 shadow-soft ring-1 ring-zinc-200 hover:bg-zinc-50"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M15 18l-6-6 6-6" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
 
-            <Card className="mx-auto max-w-6xl bg-ggWash px-10 py-14 md:px-20">
+            <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl bg-ggWash px-10 py-20 shadow-soft ring-1 ring-zinc-200/40 md:px-20">
               <div className="flex items-center justify-center gap-2 text-yellow-400">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <svg key={i} width="22" height="22" viewBox="0 0 24 24" fill={i < 4 ? 'currentColor' : 'none'}>
+                  <svg key={i} width="24" height="24" viewBox="0 0 24 24" fill={i < 4 ? 'currentColor' : 'none'}>
                     <path
                       d="M12 17.3l-6.2 3.6 1.7-7-5.5-4.8 7.2-.6L12 2l2.8 9.5 7.2.6-5.5 4.8 1.7 7z"
                       stroke="currentColor"
@@ -432,21 +418,28 @@ export default function Home() {
                 ))}
               </div>
 
-              <p className="mt-10 text-center text-3xl font-extrabold leading-tight tracking-tight text-black md:text-4xl">
+              <p className="mx-auto mt-12 max-w-4xl text-center text-3xl font-extrabold leading-tight tracking-tight text-black md:text-4xl">
                 “{testimonials[activeTestimonial].quote}”
               </p>
 
-              <div className="mt-12 flex flex-col items-center">
-                <div className="h-16 w-16 rounded-full bg-white shadow-soft ring-1 ring-zinc-200" />
-                <div className="mt-5 text-xl font-extrabold text-black">{testimonials[activeTestimonial].name}</div>
-                <div className="mt-1 text-zinc-600">{testimonials[activeTestimonial].meta}</div>
+              <div className="mt-14 flex flex-col items-center">
+                <div className="grid h-16 w-16 place-items-center overflow-hidden rounded-full bg-white shadow-soft ring-1 ring-zinc-200">
+                  <img
+                    src={testimonials[activeTestimonial].avatar}
+                    alt={testimonials[activeTestimonial].name}
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+
+                <div className="mt-6 text-xl font-extrabold text-black">{testimonials[activeTestimonial].name}</div>
+                <div className="mt-2 text-base text-zinc-600">{testimonials[activeTestimonial].meta}</div>
               </div>
-            </Card>
+            </div>
 
             <button
               aria-label="Next"
               onClick={() => setActiveTestimonial((v) => (v + 1) % testimonials.length)}
-              className="absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-gg p-4 shadow-glow hover:brightness-110"
+              className="absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-6 rounded-full bg-gg p-4 shadow-glow hover:brightness-110"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path d="M9 18l6-6-6-6" stroke="#0B0F14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -457,8 +450,8 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-ggWash">
-        <div className="mx-auto max-w-7xl px-6 py-24">
+      <section className="bg-ggWash" id="faq">
+        <div className="mx-auto max-w-7xl px-6 pt-24 pb-10">
           <div className="text-center">
             <h2 className="text-6xl font-extrabold tracking-tight text-black">FAQ</h2>
             <p className="mt-4 text-lg text-zinc-500">Questions about membership and how it works</p>
@@ -481,6 +474,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CONTACT */}
+      <ContactSection />
+
+      {/* STORIES */}
+      <StoriesSection />
+
+      {/* MOMENTS ON THE ROAD (FIXED LAYOUT) */}
+      <section className="bg-white" id="moments">
+        <div className="mx-auto max-w-7xl px-6 py-24">
+          <div className="text-center">
+            <h2 className="text-6xl font-extrabold tracking-tight text-black">Moments on the road</h2>
+            <p className="mt-4 text-lg text-zinc-500">See where our community rides and explores together</p>
+          </div>
+
+          <div className="mt-16 columns-1 gap-8 sm:columns-2 md:columns-3">
+            {[
+              '/images/moment-1.jpg',
+              '/images/moment-2.jpg',
+              '/images/moment-3.jpg',
+              '/images/moment-4.jpg',
+              '/images/moment-5.jpg',
+              '/images/moment-6.jpg',
+            ].map((src) => (
+              <div
+                key={src}
+                className="mb-8 break-inside-avoid overflow-hidden rounded-3xl bg-white shadow-soft ring-1 ring-zinc-200/70"
+              >
+                <img src={src} alt="Community moment" className="w-full h-auto object-cover" loading="lazy" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
 
       {/* SCROLL TOP */}
@@ -490,7 +517,13 @@ export default function Home() {
         className="fixed bottom-10 right-10 grid h-14 w-14 place-items-center rounded-full bg-gg text-black shadow-glow hover:brightness-110"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-          <path d="M12 5l-7 7M12 5l7 7M12 5v14" stroke="#0B0F14" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M12 5l-7 7M12 5l7 7M12 5v14"
+            stroke="#0B0F14"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
     </div>
