@@ -6,6 +6,8 @@ export default {
       fontFamily: {
         sans:   ['"Plus Jakarta Sans"', 'Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'Apple Color Emoji', 'Segoe UI Emoji']
       },
+
+      
       colors: {
         gg: '#00ff47',
         ggWash: '#E8FBE8',
