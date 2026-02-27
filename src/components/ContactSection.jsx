@@ -8,6 +8,7 @@ function ArrowRight({ className = '' }) {
   )
 }
 
+
 function IconBadge({ children }) {
   return (
     <div className="grid h-16 w-16 place-items-center rounded-2xl bg-ggSoft shadow-soft ring-1 ring-zinc-200/60">
