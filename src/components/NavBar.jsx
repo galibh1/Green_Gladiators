@@ -1,4 +1,4 @@
-// src/components/NavBar.jsx
+
 import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
