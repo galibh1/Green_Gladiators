@@ -1,12 +1,6 @@
 import React from "react";
 
-/**
- * Figma-like “Trusted by…” strip:
- * - Big heading
- * - Single-row logos (no wrapping)
- * - Overflow hidden like the screenshot
- * - Optional marquee scroll (enabled via CSS)
- */
+
 
 function WebflowLogo() {
   return (
