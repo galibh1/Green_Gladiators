@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 function WebflowLogo() {
   return (
     <div className="gg-trust-logo">
