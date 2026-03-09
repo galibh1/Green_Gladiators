@@ -14,6 +14,7 @@ export default function ReadyToRideSection() {
           </p>
 
 
+
           <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
             <button className="h-12 rounded-xl bg-gg px-10 font-semibold text-black shadow-glow hover:brightness-110">
               Join Now
