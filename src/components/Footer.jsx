@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="lg:col-span-6">
             <div className="text-3xl font-extrabold tracking-tight">
               <span className="text-gg">Green</span>
-              <span className="text-black">Glaiders</span>
+              <span className="text-black"> Gladiators</span>
             </div>
 
             <p className="mt-8 max-w-xl text-lg text-zinc-700">
@@ -185,7 +185,7 @@ export default function Footer() {
 
         {/* BOTTOM */}
         <div className="mt-8 flex flex-col gap-4 text-sm text-zinc-800 md:flex-row md:items-center md:justify-between">
-          <p className="underline underline-offset-4">© 2026 Goinnovior Limited. All rights reserved.</p>
+          <p className="underline underline-offset-4">© 2026 Green Gladiators. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
             <Link to="/privacy" className="underline underline-offset-4 hover:text-black">
