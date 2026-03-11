@@ -179,6 +179,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
+        
 
         {/* DIVIDER */}
         <div className="mt-10 h-px w-full bg-black/15" />
