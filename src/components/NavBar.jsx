@@ -11,6 +11,7 @@ const links = [
   { to: '/#community', label: 'Community' },
 ]
 
+
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
