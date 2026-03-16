@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 export default function ReadyToRideSection() {
   return (
     <section className="bg-white">
