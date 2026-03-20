@@ -9,6 +9,7 @@ const moments = [
   { src: "/images/moment-6.jpg", className: "md:col-span-1 md:row-span-2" }, // bottom middle
   // Optional (if you downloaded it)
  
+  
 ];
 
 function Tile({ src }) {
