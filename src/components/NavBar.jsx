@@ -12,7 +12,6 @@ const links = [
 ]
 
 
-
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
